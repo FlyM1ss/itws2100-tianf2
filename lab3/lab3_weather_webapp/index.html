@@ -1,0 +1,54 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>A Random Weather App</title>
+  <meta name="description" content="A simple weather app with a weather API!">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Check the Weather!</h1>
+
+  <!-- Weather -->
+  <button id="getWeather" class="btn">Get Weather</button>
+  <div id="weatherInfo">
+    <p id="location"></p>
+    <p id="temperature"></p>
+    <p id="description"></p>
+    <p id="humidity"></p>
+    <p id="windSpeed"></p>
+  </div>
+
+  <!-- Google Translate -->
+  <div class="translate-container">
+    <select id="languageSelect" class="select">
+      <option value="es">Spanish</option>
+      <option value="zh-CN">Simplified Chinese</option>
+      <option value="zh-TW">Traditional Chinese</option>
+      <option value="fr">French</option>
+      <option value="ja">Japanese</option>
+      <option value="hi">Hindi</option>
+    </select>
+
+    <button id="translateToLanguage" class="btn">Translate to Selected Language</button>
+
+  </div>
+</div>
+
+
+  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
