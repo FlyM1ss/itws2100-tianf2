@@ -1,32 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Basic Calculator</title>
-</head>
-<body>
-<form action="calculator_helper.php" method="post">
-  <input type="number" name="operand1" required>
-  <select name="operation" required>
-    <option value="add">+</option>
-    <option value="subtract">-</option>
-    <option value="multiply">*</option>
-    <option value="divide">/</option>
-  </select>
-  <input type="number" name="operand2" required>
-  <input type="submit" value="Calculate">
-</form>
-<?php if ($result !== null) : ?>
-<p>Result: <?= $result ?></p>
-<?php endif ?>
-</body>
-</html>
-
-
-
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -34,12 +7,6 @@
   <meta name="description" content="A simple calculator">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-
-  <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
   <!-- Place favicon.ico in the root directory -->
 
@@ -51,23 +18,55 @@
 
 <body>
 
-<form action="calculator_main.php" method="post">
-  <input type="number" name="operand1" required>
-  <select name="operation" required>
-    <option value="add">+</option>
-    <option value="subtract">-</option>
-    <option value="multiply">*</option>
-    <option value="divide">/</option>
-  </select>
-  <input type="number" name="operand2" required>
-  <input type="submit" value="Calculate">
-</form>
+<div id="calculator">
+  <input type="text" id="display" disabled>
+  <br>
+  <button onclick="appendCharacter('7')">7</button>
+  <button onclick="appendCharacter('8')">8</button>
+  <button onclick="appendCharacter('9')">9</button>
+  <button onclick="appendCharacter('/')">/</button>
+  <br>
+  <button onclick="appendCharacter('4')">4</button>
+  <button onclick="appendCharacter('5')">5</button>
+  <button onclick="appendCharacter('6')">6</button>
+  <button onclick="appendCharacter('*')">*</button>
+  <br>
+  <button onclick="appendCharacter('1')">1</button>
+  <button onclick="appendCharacter('2')">2</button>
+  <button onclick="appendCharacter('3')">3</button>
+  <button onclick="appendCharacter('-')">-</button>
+  <br>
+  <button onclick="appendCharacter('0')">0</button>
+  <button onclick="calculate()">Calculate</button>
+  <button onclick="appendCharacter('+')">+</button>
+  <br>
+  <button onclick="clearDisplay()">Clear</button>
+</div>
 
-<!-- Display result if available -->
-<?php if (isset($result)) : ?>
-<p>Result: <?= $result ?></p>
-<?php endif ?>
+<script>
+  const display = document.getElementById('display');
 
+  function appendCharacter(character) {
+    display.value += character;
+  }
+
+  function clearDisplay() {
+    display.value = '';
+  }
+
+  function calculate() {
+    const expression = display.value;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'calculator_main.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        display.value = xhr.responseText;
+      }
+    }
+    xhr.send('expression=' + encodeURIComponent(expression));
+  }
+</script>
 
 </body>
 

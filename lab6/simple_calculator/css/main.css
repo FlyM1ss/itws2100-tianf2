@@ -261,3 +261,8 @@ textarea {
   }
 }
 
+#calculator button {
+  width: 8em;
+  height: 3em;
+}
+

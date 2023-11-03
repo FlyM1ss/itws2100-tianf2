@@ -1,38 +1,33 @@
 <?php
-// calculate.php
 
-include 'calculator_helper.php';
+function calculateExpression($expression) {
+  // Split the expression into operands and operator
+  if (preg_match('/(\d+\.?\d*)\s*([\+\-\*\/])\s*(\d+\.?\d*)/', $expression, $matches)) {
+    $operand1 = floatval($matches[1]);
+    $operator = $matches[2];
+    $operand2 = floatval($matches[3]);
 
-$result = null;
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $a = floatval($_POST['operand1']);
-  $b = floatval($_POST['operand2']);
-  $operation = $_POST['operation'];
-
-  $calculator = new BasicCalculator();
-
-  switch ($operation) {
-    case 'add':
-      $calculator->setOperation(new Addition());
-      break;
-    case 'subtract':
-      $calculator->setOperation(new Subtraction());
-      break;
-    case 'multiply':
-      $calculator->setOperation(new Multiplication());
-      break;
-    case 'divide':
-      $calculator->setOperation(new Division());
-      break;
-  }
-
-  try {
-    $result = $calculator->getResult($a, $b);
-  } catch (Exception $e) {
-    $result = $e->getMessage();
+    switch ($operator) {
+      case '+':
+        return $operand1 + $operand2;
+      case '-':
+        return $operand1 - $operand2;
+      case '*':
+        return $operand1 * $operand2;
+      case '/':
+        if ($operand2 == 0) {
+          return "Error: Cannot divide by zero";
+        }
+        return $operand1 / $operand2;
+      default:
+        return "Error: Unsupported operator '$operator'";
+    }
+  } else {
+    return "Error: Invalid expression format";
   }
 }
 
-include 'index.html';
-?>
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $expression = $_POST['expression'];
+  echo calculateExpression($expression);
+}

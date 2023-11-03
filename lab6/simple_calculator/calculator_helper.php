@@ -33,6 +33,9 @@ class Multiplication implements Operation {
 }
 
 class Division implements Operation {
+  /**
+   * @throws Exception
+   */
   public function calculate($a, $b) {
     if($b == 0) {
       throw new Exception("Cannot divide by zero");
