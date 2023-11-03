@@ -1,8 +1,9 @@
 <?php
+// calculator_main.php
 
 function calculateExpression($expression) {
-  // Split the expression into operands and operator
-  if (preg_match('/(\d+\.?\d*)\s*([\+\-\*\/])\s*(\d+\.?\d*)/', $expression, $matches)) {
+  // Updated regular expression to handle negative numbers
+  if (preg_match('/(-?\d+\.?\d*)\s*([\+\-\*\/])\s*(-?\d+\.?\d*)/', $expression, $matches)) {
     $operand1 = floatval($matches[1]);
     $operator = $matches[2];
     $operand2 = floatval($matches[3]);
