@@ -128,6 +128,35 @@ class TenPower extends Operation {
     }
 }
 
+class Sine extends Operation {
+    public function operate() {
+        return sin($this->operand_1);
+    }
+
+    public function getEquation() {
+        return 'sin(' . $this->operand_1 . ') = ' . $this->operate();
+    }
+}
+
+class Cosine extends Operation {
+    public function operate() {
+        return cos($this->operand_1);
+    }
+
+    public function getEquation() {
+        return 'cos(' . $this->operand_1 . ') = ' . $this->operate();
+    }
+}
+
+class Tangent extends Operation {
+    public function operate() {
+        return tan($this->operand_1);
+    }
+
+    public function getEquation() {
+        return 'tan(' . $this->operand_1 . ') = ' . $this->operate();
+    }
+}
 
 
 
@@ -180,7 +209,15 @@ try {
         $op = new Exponential($o1);
     } elseif (isset($_POST['10^x']) && $_POST['10^x'] == '10^x') {
         $op = new TenPower($o1);
-    } else {
+    } elseif (isset($_POST['sin']) && $_POST['sin'] == 'sin') {
+        $op = new Sine($o1);
+    } elseif (isset($_POST['cos']) && $_POST['cos'] == 'cos') {
+        $op = new Cosine($o1);
+    } elseif (isset($_POST['tan']) && $_POST['tan'] == 'tan') {
+        $op = new Tangent($o1);
+    }
+
+    else {
         throw new Exception('No operation given.');
     }
 }
@@ -193,9 +230,16 @@ try {
 <!doctype html>
 <html lang="en">
 <head>
-<title>PHP Calculator</title>
+    <title>PHP Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern PHP Calculator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="calculator">
+    <h1>PHP Calculator</h1>
+    <div id="result" class="result">
   <pre id="result">
   <?php 
     if (isset($op)) {
@@ -212,25 +256,31 @@ try {
     } 
   ?>
   </pre>
-  <form method="post" action="calculator.php">
-    <input type="text" name="op1" id="name" value="">
-    <input type="text" name="op2" id="name" value="">
-    <br/>
-    <!-- Only one of these will be set with their respective value at a time -->
-        <input type="submit" name="add" value="Add">
-        <input type="submit" name="sub" value="Subtract">
-        <input type="submit" name="mult" value="Multiply">
-        <input type="submit" name="divi" value="Divide">
-        <input type="submit" name="sqrt" value="Square Root">
-        <input type="submit" name="log10" value="Log(10)">
-        <input type="submit" name="ln" value="Ln">
-        <br>
-      <input type="submit" name="x^2" value="x^2" />
-      <input type="submit" name="x^y" value="x^y" />
-      <input type="submit" name="e^x" value="e^x" />
-      <input type="submit" name="10^x" value="10^x" />
-
-  </form>
+    </div>
+    <form id="calcForm" method="post" action="calculator.php" class="calc-form">
+        <div class="input-group">
+            <input type="text" name="op1" id="op1" placeholder="Enter first number" required>
+            <input type="text" name="op2" id="op2" placeholder="Enter second number">
+        </div>
+        <div class="button-group">
+            <input type="submit" name="add" value="Add">
+            <input type="submit" name="sub" value="Subtract">
+            <input type="submit" name="mult" value="Multiply">
+            <input type="submit" name="divi" value="Divide">
+            <input type="submit" name="sqrt" value="Square Root">
+            <input type="submit" name="log10" value="Log(10)">
+            <input type="submit" name="ln" value="Ln">
+            <br>
+            <input type="submit" name="x^2" value="x^2" />
+            <input type="submit" name="x^y" value="x^y" />
+            <input type="submit" name="e^x" value="e^x" />
+            <input type="submit" name="10^x" value="10^x" />
+            <input type="submit" name="sin" value="sin" />
+            <input type="submit" name="cos" value="cos" />
+            <input type="submit" name="tan" value="tan" />
+        </div>
+    </form>
+</div>
 </body>
 </html>
 
