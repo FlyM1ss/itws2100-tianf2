@@ -7,16 +7,14 @@ abstract class Operation {
     /**
      * @throws Exception
      */
-    public function __construct($o1, $o2) {
-    // Make sure we're working with numbers...
-    if (!is_numeric($o1) || !is_numeric($o2)) {
-      throw new Exception('Non-numeric operand.');
+    public function __construct($o1, $o2 = null) {
+        if (!is_numeric($o1) || ($o2 !== null && !is_numeric($o2))) {
+            throw new Exception('Non-numeric operand.');
+        }
+
+        $this->operand_1 = $o1;
+        $this->operand_2 = $o2;
     }
-    
-    // Assign passed values to member variables
-    $this->operand_1 = $o1;
-    $this->operand_2 = $o2;
-  }
   public abstract function operate();
   public abstract function getEquation(); 
 }
@@ -59,6 +57,80 @@ class Division extends Operation {
         return $this->operand_1 . ' / ' . $this->operand_2 . ' = ' . $this->operate();
     }
 }
+
+class SquareRoot extends Operation {
+    public function operate() {
+        return sqrt($this->operand_1);
+    }
+
+    public function getEquation() {
+        return '√' . $this->operand_1 . ' = ' . $this->operate();
+    }
+}
+
+class Log10 extends Operation {
+    public function operate() {
+        return log10($this->operand_1);
+    }
+
+    public function getEquation() {
+        return 'log(' . $this->operand_1 . ') = ' . $this->operate();
+    }
+}
+
+class Ln extends Operation {
+    public function operate() {
+        return log($this->operand_1);
+    }
+
+    public function getEquation() {
+        return 'ln(' . $this->operand_1 . ') = ' . $this->operate();
+    }
+}
+
+class Square extends Operation {
+    public function operate() {
+        return pow($this->operand_1, 2);
+    }
+
+    public function getEquation() {
+        return $this->operand_1 . '^2 = ' . $this->operate();
+    }
+}
+
+class Power extends Operation {
+    public function operate() {
+        return pow($this->operand_1, $this->operand_2);
+    }
+
+    public function getEquation() {
+        return $this->operand_1 . '^' . $this->operand_2 . ' = ' . $this->operate();
+    }
+}
+
+class Exponential extends Operation {
+    public function operate() {
+        return exp($this->operand_1);
+    }
+
+    public function getEquation() {
+        return 'e^' . $this->operand_1 . ' = ' . $this->operate();
+    }
+}
+
+class TenPower extends Operation {
+    public function operate() {
+        return pow(10, $this->operand_1);
+    }
+
+    public function getEquation() {
+        return '10^' . $this->operand_1 . ' = ' . $this->operate();
+    }
+}
+
+
+
+
 // Some debugs - uncomment these to see what is happening...
 // echo '$_POST print_r=>',print_r($_POST);
 // echo "<br>",'$_POST vardump=>',var_dump($_POST);
@@ -85,24 +157,34 @@ class Division extends Operation {
 // Then tell me if there is a way to do this without the ifs
 // We might cover such a way on Tuesday...
 
-  try {
+try {
     if (isset($_POST['add']) && $_POST['add'] == 'Add') {
-      $op = new Addition($o1, $o2);
+        $op = new Addition($o1, $o2);
     } elseif (isset($_POST['sub']) && $_POST['sub'] == 'Subtract') {
         $op = new Subtraction($o1, $o2);
     } elseif (isset($_POST['mult']) && $_POST['mult'] == 'Multiply') {
         $op = new Multiplication($o1, $o2);
     } elseif (isset($_POST['divi']) && $_POST['divi'] == 'Divide') {
         $op = new Division($o1, $o2);
+    } elseif (isset($_POST['sqrt']) && $_POST['sqrt'] == 'Square Root') {
+        $op = new SquareRoot($o1);
+    } elseif (isset($_POST['log10']) && $_POST['log10'] == 'Log(10)') {
+        $op = new Log10($o1);
+    } elseif (isset($_POST['ln']) && $_POST['ln'] == 'Ln') {
+        $op = new Ln($o1);
+    } elseif (isset($_POST['x^2']) && $_POST['x^2'] == 'x^2') {
+        $op = new Square($o1);
+    } elseif (isset($_POST['x^y']) && $_POST['x^y'] == 'x^y') {
+        $op = new Power($o1, $o2);
+    } elseif (isset($_POST['e^x']) && $_POST['e^x'] == 'e^x') {
+        $op = new Exponential($o1);
+    } elseif (isset($_POST['10^x']) && $_POST['10^x'] == '10^x') {
+        $op = new TenPower($o1);
     } else {
-      throw new Exception('No operation given.');
+        throw new Exception('No operation given.');
     }
+}
 
-
-// Put code for subtraction, multiplication, and division here
-
-
-  }
   catch (Exception $e) {
     $err[] = $e->getMessage();
   }
@@ -131,14 +213,23 @@ class Division extends Operation {
   ?>
   </pre>
   <form method="post" action="calculator.php">
-    <input type="text" name="op1" id="name" value="" />
-    <input type="text" name="op2" id="name" value="" />
+    <input type="text" name="op1" id="name" value="">
+    <input type="text" name="op2" id="name" value="">
     <br/>
     <!-- Only one of these will be set with their respective value at a time -->
-    <input type="submit" name="add" value="Add" />  
-    <input type="submit" name="sub" value="Subtract" />  
-    <input type="submit" name="mult" value="Multiply" />  
-    <input type="submit" name="divi" value="Divide" />  
+        <input type="submit" name="add" value="Add">
+        <input type="submit" name="sub" value="Subtract">
+        <input type="submit" name="mult" value="Multiply">
+        <input type="submit" name="divi" value="Divide">
+        <input type="submit" name="sqrt" value="Square Root">
+        <input type="submit" name="log10" value="Log(10)">
+        <input type="submit" name="ln" value="Ln">
+        <br>
+      <input type="submit" name="x^2" value="x^2" />
+      <input type="submit" name="x^y" value="x^y" />
+      <input type="submit" name="e^x" value="e^x" />
+      <input type="submit" name="10^x" value="10^x" />
+
   </form>
 </body>
 </html>
