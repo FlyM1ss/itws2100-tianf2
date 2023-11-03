@@ -1,0 +1,78 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Simple Calculator</title>
+  <meta name="description" content="A simple calculator">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+<div id="calculator">
+  <input type="text" id="display" disabled>
+  <br>
+  <button onclick="appendCharacter('7')">7</button>
+  <button onclick="appendCharacter('8')">8</button>
+  <button onclick="appendCharacter('9')">9</button>
+  <button onclick="appendCharacter('/')">/</button>
+  <br>
+  <button onclick="appendCharacter('4')">4</button>
+  <button onclick="appendCharacter('5')">5</button>
+  <button onclick="appendCharacter('6')">6</button>
+  <button onclick="appendCharacter('*')">*</button>
+  <br>
+  <button onclick="appendCharacter('1')">1</button>
+  <button onclick="appendCharacter('2')">2</button>
+  <button onclick="appendCharacter('3')">3</button>
+  <button onclick="appendCharacter('-')">-</button>
+  <br>
+  <button onclick="appendCharacter('0')">0</button>
+  <button onclick="appendCharacter('+')">+</button>
+  <br>
+  <button onclick="appendCharacter('sqrt(')">√</button>
+  <button onclick="appendCharacter('log(')">log</button>
+  <button onclick="appendCharacter('ln(')">ln</button>
+  <button onclick="appendCharacter(')')">)</button>
+  <br>
+  <button onclick="calculate()">Calculate</button>
+  <button onclick="clearDisplay()">Clear</button>
+</div>
+
+<script>
+  const display = document.getElementById('display');
+
+  function appendCharacter(character) {
+    display.value += character;
+  }
+
+  function clearDisplay() {
+    display.value = '';
+  }
+
+  function calculate() {
+    const expression = display.value;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'calculator_main.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        display.value = xhr.responseText;
+      }
+    }
+    xhr.send('expression=' + encodeURIComponent(expression));
+  }
+</script>
+
+</body>
+
+</html>
