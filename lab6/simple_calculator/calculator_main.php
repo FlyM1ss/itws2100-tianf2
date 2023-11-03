@@ -2,8 +2,23 @@
 // calculator_main.php
 
 function calculateExpression($expression) {
-  // Updated regular expression to handle negative numbers
-  if (preg_match('/(-?\d+\.?\d*)\s*([\+\-\*\/])\s*(-?\d+\.?\d*)/', $expression, $matches)) {
+  // Check for square root operation
+  if (preg_match('/sqrt\((-?\d+\.?\d*)\)/', $expression, $matches)) {
+    $operand = floatval($matches[1]);
+    return sqrt($operand);
+  }
+  // Check for log base 10 operation
+  elseif (preg_match('/log\((-?\d+\.?\d*)\)/', $expression, $matches)) {
+    $operand = floatval($matches[1]);
+    return log10($operand);
+  }
+  // Check for natural logarithm operation
+  elseif (preg_match('/ln\((-?\d+\.?\d*)\)/', $expression, $matches)) {
+    $operand = floatval($matches[1]);
+    return log($operand);
+  }
+  // Check for basic operations (addition, subtraction, multiplication, division)
+  elseif (preg_match('/(-?\d+\.?\d*)\s*([\+\-\*\/])\s*(-?\d+\.?\d*)/', $expression, $matches)) {
     $operand1 = floatval($matches[1]);
     $operator = $matches[2];
     $operand2 = floatval($matches[3]);
