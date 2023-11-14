@@ -2,7 +2,7 @@
 session_start();
 
 $host = 'localhost';
-$db   = 'login';
+$db   = 'login_secure';
 $user = 'root';
 $pass = 'TeamSixteen16';
 $charset = 'utf8mb4';
