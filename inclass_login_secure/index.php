@@ -49,4 +49,3 @@ if (isset($_SESSION['username'])) {
           </form>";
 }
 
-?>
