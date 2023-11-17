@@ -1,0 +1,68 @@
+{
+    "Websys_course":{
+        "Lectures": {
+            "lecture1": {
+                "title": "Syllabus",
+                "description": "An overview what is to be accomplished in this class.",
+                "link": "https://docs.google.com/presentation/d/108X6S-Xjn_RWOtriaLqWZhVgV6sYk4KXIpAobzW2HbI/edit#slide=id.p"
+            }, 
+            "lecture2": {
+                "title": "The Basics",
+                "description": "Mostly review of Intro to ITWS: the process of server communication and internet protocols",
+                "link": "https://docs.google.com/presentation/d/1jZV3MJSI0rRpbwSsD3cIHG81N-p9wMFpAsG9MXZK30A/edit#slide=id.g4777043729_0_60"
+            }, 
+            "lecture3": {
+                "title": "Markup Languages",
+                "description": "This presentation covers the history of markup languages as well as the anatomy of such languages.",
+                "link": "https://drive.google.com/file/d/1R3rh_VvkP7LpuCp4T17P8wZEoETcXOLh/view"
+            }, 
+            "lecture4": {
+                "title": "Cascading Style Sheets",
+                "description": "All the information you need to know about coding in CSS.",
+                "link": "https://docs.google.com/presentation/d/13l9w_KRL1IEO2GLHJj4P4IJ6PY7_lB2q/edit#slide=id.p1"
+            }, 
+            "lecture5": {
+                "title": "APIs",
+                "description": "This presentation tells you what an API is and the ruleset an API must follow.",
+                "link": "https://docs.google.com/presentation/d/13zQaEmzgy7yJ5tInYNZmxt04m9FOT1PxS1YZqZsW7tE/edit#slide=id.p"
+            }, 
+            "lecture6": {
+                "title": "Frontend Optimization",
+                "description": "Essentially this is a list of a bunch of things that one can and should optomize while coding.",
+                "link": "https://docs.google.com/presentation/d/1e6rstQNTcUzl04qNhBUkLpRFqZMQ1Ife5EXRb9GN_sI/edit#slide=id.p"
+            }
+        },
+        "Labs": {
+            "lab1": {
+                "title": "Group Portfolios",
+                "description": "By now, you have established your groups, come up with a team name, and are in the process of writing a proposal for a serious project. It’s a good thing I know you though--it’s going to be really difficult to get clients without a web presence! Doubly ironic for us web developers. Let’s fix that.",
+                "link": "https://docs.google.com/document/d/1TVsVEJKSUBs4KEwSUe6QFsp-t_a8h4s1toh9jjKjHfw/edit"
+            }, 
+            "lab2": {
+                "title": "Constitution",
+                "description": "There’s a law that says all schools with Federal funding need to have some sort of programming about the history of the Constitution on that day (surprise: all universities benefit from Federal funding). But we’re ITWS: we can do better than just one day or just a couple of minutes.",
+                "link": "https://docs.google.com/document/d/1A3B7FTbxIw71oOCAiBsfEHdHcXeef1gjrXsG-VI6e-U/edit"
+            },
+            "lab3": {
+                "title": "Weather API and More!",
+                "description": "We are going to use the OpenWeatherMap API to create a web app to show the weather for Troy, NY.",
+                "link": "https://docs.google.com/document/d/1-D4VYKxBo2OnHR4Pyg9kPkoQajd3vsBgHUzRvdlo6Xw/edit#heading=h.qduqrdgqibzv"
+            },
+            "lab4": {
+                "title": "AI Takes Over ITWS",
+                "description": "We are going to make the ITWS website except we will only use AI to generate all the code.",
+                "link": "https://docs.google.com/document/d/1SoU_8JJEjfdOLIclXF4TeXEFFYbXKTH9IWUG2gHSazY/edit"
+            },
+            "lab5": {
+                "title": "Frontend Optimization",
+                "description": "We are going to optimize a game I made called Free Bee as found at https://freebee.fun/play/ It is a clone of the New York Times game Spelling Bee. You can find the source code for the game here: https://github.com/freebee-game/web-client",
+                "link": ""
+            },
+            "lab6": {
+                "title": "Spooky LMS",
+                "description": "We are going to remake the single spookiest piece of software ever to exist–LMS!",
+                "link": "https://docs.google.com/document/d/1oC6BOAmPbR0p6j_DWXWK_FInNgT8JaiUAwMWEnQf4Vw/edit"
+            }
+        }
+    }
+}
